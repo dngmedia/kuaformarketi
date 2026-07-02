@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sepetim — Kuaförmarketi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .cart-layout{max-width:1100px;margin:30px auto 70px;padding:0 20px;display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start;}
+  .cart-page-title{font-size:26px;font-weight:700;margin-bottom:24px;}
+
+  .cart-item{display:grid;grid-template-columns:80px 1fr auto auto;gap:16px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px;background:#fff;}
+  .cart-item .thumb{width:80px;aspect-ratio:1/1;background:var(--bg-2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#a7adba;text-align:center;}
+  .cart-item h4{font-size:14.5px;font-weight:600;margin-bottom:6px;}
+  .cart-item .unit-price{font-size:12.5px;color:var(--gray);}
+  .cart-item .qty-box{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;overflow:hidden;height:36px;}
+  .cart-item .qty-box button{background:var(--bg-2);border:none;width:30px;height:100%;font-size:15px;cursor:pointer;color:var(--navy);}
+  .cart-item .qty-box span{width:32px;text-align:center;font-weight:600;font-size:13px;}
+  .cart-item .item-total{font-weight:700;font-size:15px;text-align:right;}
+  .cart-item .remove-btn{grid-column:1/-1;text-align:right;font-size:11.5px;color:var(--red);cursor:pointer;margin-top:-6px;}
+
+  .empty-cart{text-align:center;padding:60px 20px;border:1px dashed var(--line);border-radius:12px;}
+  .empty-cart p{color:var(--gray);font-size:14px;margin-bottom:18px;}
+
+  .summary-card{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--bg-2);position:sticky;top:100px;}
+  .summary-card h3{font-size:16px;font-weight:700;margin-bottom:18px;}
+  .summary-row{display:flex;justify-content:space-between;font-size:13.5px;color:var(--gray);margin-bottom:10px;}
+  .summary-total{display:flex;justify-content:space-between;font-size:18px;font-weight:700;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+  .checkout-buttons{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+  .checkout-buttons .btn-amber, .checkout-buttons .btn-primary{width:100%;text-align:center;padding:14px;}
+
+  .payment-info{margin-top:18px;padding:14px;background:#fff;border-radius:8px;font-size:12px;color:var(--gray);line-height:1.6;display:none;}
+  .payment-info.show{display:block;}
+  .payment-info b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="campaign-bar">Kuaförler ve berberler için <b>güvenli alışveriş</b> · Kart / Havale ile ödeme</div>
+
+<header>
+  <nav>
+    <div class="logo">Kuaför<span>marketi</span></div>
+    <div class="main-links">
+      <a href="index.html">Anasayfa</a>
+      <a href="urun-detay.html?urun=1">Ürünler</a>
+      <a href="blog.html">Blog</a>
+      <a href="sss.html">S.S.S.</a>
+      <a href="siparis-takip.html">Kargo Takip</a>
+      <a href="iletisim.html">İletişim</a>
+    </div>
+    <div class="nav-icons">
+      <a href="sepet.html" class="icon-item"><span class="icon">🛒</span>SEPETİM<span class="cart-count">0</span></a>
+    </div>
+  </nav>
+</header>
+
+<div class="breadcrumb"><a href="index.html">Anasayfa</a><span class="sep">/</span><span>Sepetim</span></div>
+
+<div class="cart-layout">
+  <div>
+    <div class="cart-page-title">Sepetim</div>
+    <div id="cartItemsContainer"></div>
+  </div>
+
+  <div class="summary-card">
+    <h3>Sipariş Özeti</h3>
+    <div class="summary-row"><span>Ara Toplam</span><span id="subtotal">₺0,00</span></div>
+    <div class="summary-row"><span>Kargo</span><span>Ücretsiz</span></div>
+    <div class="summary-total"><span>Toplam</span><span id="total">₺0,00</span></div>
+
+    <div class="checkout-buttons">
+      <span class="btn-amber" onclick="showPayment('kart')">Kart ile Öde</span>
+      <span class="btn-primary" onclick="showPayment('havale')">Havale ile Öde</span>
+    </div>
+
+    <div class="payment-info" id="kartInfo">
+      "Kart ile Öde" seçeneğine bastığınızda güvenli ödeme sayfamıza yönlendirileceksiniz. Ödeme altyapısı henüz aktif edilmedi — <b>iyzico/PayTR bağlantısı yakında eklenecektir.</b>
+    </div>
+    <div class="payment-info" id="havaleInfo">
+      <b>Havale/EFT ile ödeme:</b><br>
+      Alıcı: Kuaförmarketi<br>
+      IBAN: TR__ ____ ____ ____ ____ ____ __<br>
+      Açıklama kısmına adınızı ve telefon numaranızı yazmanız yeterlidir. Dekontu <a href="mailto:info@kuaformarketi.com" style="color:var(--navy);font-weight:600;">info@kuaformarketi.com</a> adresine iletebilirsiniz.
+    </div>
+  </div>
+</div>
+
+<footer id="iletisim">
+  <div class="footer-inner">
+    <div>
+      <div class="logo">Kuaför<span style="color:#f0a202">marketi</span></div>
+      <p class="footer-tag">Kuaförler için profesyonel salon ekipmanları üretiyoruz.</p>
+      <div class="pay-icons"><span>Kart</span><span>Havale</span><span>SSL</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>Önemli Bilgiler</h4>
+      <a href="#">Üyelik Sözleşmesi</a>
+      <a href="#">Teslimat Koşulları</a>
+      <a href="#">Satış Sözleşmesi</a>
+      <a href="#">Gizlilik ve Güvenlik</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hızlı Erişim</h4>
+      <a href="blog.html">Blog</a>
+      <a href="siparis-takip.html">Kargo Takip</a>
+      <a href="sss.html">S.S.S.</a>
+      <a href="iletisim.html">İletişim</a>
+    </div>
+    <div class="footer-col">
+      <h4>Adres &amp; İletişim</h4>
+      <p>Bursa, Türkiye</p>
+      <p>0 (5XX) XXX XX XX</p>
+      <a href="mailto:info@kuaformarketi.com">info@kuaformarketi.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Kuaförmarketi. Tüm hakları saklıdır.</span>
+    <span>Kart · Havale ile güvenli ödeme</span>
+  </div>
+</footer>
+
+<script src="assets/cart.js"></script>
+<script>
+  function renderCartPage(){
+    const cart = getCart();
+    const container = document.getElementById("cartItemsContainer");
+
+    if(cart.length === 0){
+      container.innerHTML = `
+        <div class="empty-cart">
+          <p>Sepetiniz henüz boş.</p>
+          <a href="urun-detay.html?urun=1" class="btn-primary">Ürünlere Göz At</a>
+        </div>`;
+      document.getElementById("subtotal").textContent = formatPrice(0);
+      document.getElementById("total").textContent = formatPrice(0);
+      return;
+    }
+
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="thumb">[ foto ]</div>
+        <div>
+          <h4>${item.name}</h4>
+          <div class="unit-price">${item.price} / adet</div>
+        </div>
+        <div class="qty-box">
+          <button onclick="updateCartQty('${item.id}', ${item.qty - 1})">−</button>
+          <span>${item.qty}</span>
+          <button onclick="updateCartQty('${item.id}', ${item.qty + 1})">+</button>
+        </div>
+        <div class="item-total">${formatPrice(parsePrice(item.price) * item.qty)}</div>
+        <div class="remove-btn" onclick="removeFromCart('${item.id}')">Kaldır</div>
+      </div>
+    `).join("");
+
+    const total = getCartTotal();
+    document.getElementById("subtotal").textContent = formatPrice(total);
+    document.getElementById("total").textContent = formatPrice(total);
+  }
+
+  function showPayment(type){
+    document.getElementById("kartInfo").classList.remove("show");
+    document.getElementById("havaleInfo").classList.remove("show");
+    document.getElementById(type + "Info").classList.add("show");
+  }
+
+  renderCartPage();
+</script>
+
+</body>
+</html>

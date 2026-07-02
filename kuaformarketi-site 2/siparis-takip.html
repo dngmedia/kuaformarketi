@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kargo Takip — Kuaförmarketi</title>
+<meta name="description" content="Kuaförmarketi siparişinizin kargo durumunu takip edin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .track-wrap{max-width:560px;margin:60px auto;padding:0 20px;}
+  .track-header{text-align:center;margin-bottom:32px;}
+  .track-header .eyebrow{font-size:12px;font-weight:700;color:var(--amber-dark);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:10px;}
+  .track-header h1{font-size:28px;font-weight:700;margin-bottom:10px;}
+  .track-header p{font-size:13.5px;color:var(--gray);}
+
+  .track-card{border:1px solid var(--line);border-radius:12px;padding:32px;background:#fff;}
+  .form-group{margin-bottom:18px;}
+  .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:8px;}
+  .form-group select, .form-group input{
+    width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:14px;
+    font-family:'Inter',sans-serif;background:#fff;
+  }
+  .form-group select:focus, .form-group input:focus{outline:none;border-color:var(--navy);}
+  .track-btn{width:100%;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:14px;font-weight:700;font-size:14px;cursor:pointer;}
+
+  .track-note{
+    margin-top:20px;padding:14px 16px;background:var(--bg-2);border-radius:8px;
+    font-size:12.5px;color:var(--gray);line-height:1.6;
+  }
+
+  .help-row{max-width:560px;margin:24px auto 60px;padding:0 20px;text-align:center;font-size:13px;color:var(--gray);}
+  .help-row a{color:var(--navy);font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="campaign-bar">Kuaförler ve berberler için <b>güvenli alışveriş</b> · Kart / Havale ile ödeme</div>
+
+<header>
+  <nav>
+    <div class="logo">Kuaför<span>marketi</span></div>
+    <div class="main-links">
+      <a href="index.html">Anasayfa</a>
+      <a href="urun-detay.html?urun=1">Ürünler</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="blog.html">Blog</a>
+      <a href="sss.html">S.S.S.</a>
+      <a href="siparis-takip.html" class="active">Kargo Takip</a>
+      <a href="iletisim.html">İletişim</a>
+    </div>
+    <div class="nav-icons">
+      <a href="sepet.html" class="icon-item"><span class="icon">🛒</span>SEPETİM<span class="cart-count">0</span></a>
+    </div>
+  </nav>
+</header>
+
+<div class="breadcrumb"><a href="index.html">Anasayfa</a><span class="sep">/</span><span>Kargo Takip</span></div>
+
+<div class="track-wrap">
+  <div class="track-header">
+    <div class="eyebrow">Sipariş Takibi</div>
+    <h1>Kargonuzu Takip Edin</h1>
+    <p>Siparişinizle birlikte size iletilen kargo firmasını ve takip numaranızı girin.</p>
+  </div>
+
+  <div class="track-card">
+    <div class="form-group">
+      <label for="kargoFirmasi">Kargo Firması</label>
+      <select id="kargoFirmasi">
+        <option value="yurtici">Yurtiçi Kargo</option>
+        <option value="aras">Aras Kargo</option>
+        <option value="mng">MNG Kargo</option>
+        <option value="ptt">PTT Kargo</option>
+        <option value="surat">Sürat Kargo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="takipNo">Kargo Takip Numarası</label>
+      <input type="text" id="takipNo" placeholder="Örn: 123456789012">
+    </div>
+
+    <button class="track-btn" onclick="takipEt()">Kargomu Sorgula</button>
+
+    <div class="track-note">
+      "Kargomu Sorgula" butonuna bastığınızda, seçtiğiniz kargo firmasının resmi takip sayfası yeni bir sekmede açılır. Takip numaranızı o sayfaya yapıştırarak anlık durumunuzu görebilirsiniz.
+    </div>
+  </div>
+</div>
+
+<div class="help-row">
+  Takip numaranızı bulamıyor musunuz? <a href="mailto:info@kuaformarketi.com">Bize ulaşın</a>, sipariş numaranızla birlikte size yardımcı olalım.
+</div>
+
+<footer id="iletisim">
+  <div class="footer-inner">
+    <div>
+      <div class="logo">Kuaför<span style="color:#f0a202">marketi</span></div>
+      <p class="footer-tag">Kuaförler için profesyonel salon ekipmanları üretiyoruz.</p>
+      <div class="pay-icons"><span>Kart</span><span>Havale</span><span>SSL</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>Önemli Bilgiler</h4>
+      <a href="#">Üyelik Sözleşmesi</a>
+      <a href="#">Teslimat Koşulları</a>
+      <a href="#">Satış Sözleşmesi</a>
+      <a href="#">Gizlilik ve Güvenlik</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hızlı Erişim</h4>
+      <a href="blog.html">Blog</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="siparis-takip.html">Kargo Takip</a>
+      <a href="sss.html">S.S.S.</a>
+      <a href="iletisim.html">İletişim</a>
+    </div>
+    <div class="footer-col">
+      <h4>Adres &amp; İletişim</h4>
+      <p>Bursa, Türkiye</p>
+      <p>0 (5XX) XXX XX XX</p>
+      <a href="mailto:info@kuaformarketi.com">info@kuaformarketi.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Kuaförmarketi. Tüm hakları saklıdır.</span>
+    <span>Kart · Havale ile güvenli ödeme</span>
+  </div>
+</footer>
+
+<script>
+  const KARGO_LINKS = {
+    yurtici: "https://www.yurticikargo.com/tr/online-servisler/gonderi-sorgula",
+    aras: "https://kargotakip.araskargo.com.tr/",
+    mng: "https://www.mngkargo.com.tr/gonderitakip",
+    ptt: "https://gonderitakip.ptt.gov.tr/",
+    surat: "https://www.suratkargo.com.tr/KargoTakip"
+  };
+
+  function takipEt(){
+    const firma = document.getElementById("kargoFirmasi").value;
+    const takipNo = document.getElementById("takipNo").value.trim();
+
+    if(!takipNo){
+      alert("Lütfen kargo takip numaranızı girin.");
+      return;
+    }
+
+    const url = KARGO_LINKS[firma];
+    window.open(url, "_blank");
+  }
+</script>
+
+<script src="assets/cart.js"></script>
+</body>
+</html>
